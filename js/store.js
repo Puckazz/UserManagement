@@ -1,0 +1,4 @@
+const Store = {
+  users: [],
+  filtered: [],
+};
