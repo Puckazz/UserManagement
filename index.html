@@ -8,6 +8,162 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="bg-gray-100 min-h-screen">
+    <!-- User Detail Modal -->
+    <div
+      id="detail-modal"
+      class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+    >
+      <div
+        class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto"
+      >
+        <div class="flex justify-between items-center border-b px-6 py-4">
+          <h2 class="text-xl font-bold text-indigo-700">User Details</h2>
+          <button
+            onclick="
+              document.getElementById('detail-modal').classList.add('hidden')
+            "
+            class="text-gray-500 hover:text-gray-800 text-2xl"
+          >
+            &times;
+          </button>
+        </div>
+        <div id="detail-content" class="px-6 py-4"></div>
+      </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div
+      id="form-modal"
+      class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+    >
+      <div
+        class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto"
+      >
+        <div class="flex justify-between items-center border-b px-6 py-4">
+          <h2 id="form-title" class="text-xl font-bold text-indigo-700">
+            Add User
+          </h2>
+          <button
+            onclick="
+              document.getElementById('form-modal').classList.add('hidden')
+            "
+            class="text-gray-500 hover:text-gray-800 text-2xl"
+          >
+            &times;
+          </button>
+        </div>
+        <form id="user-form" class="px-6 py-4 space-y-4">
+          <input type="hidden" id="form-user-id" />
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Name *</label
+            >
+            <input
+              id="form-name"
+              type="text"
+              required
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+            <p id="err-name" class="text-red-500 text-sm mt-1 hidden"></p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Username *</label
+            >
+            <input
+              id="form-username"
+              type="text"
+              required
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+            <p id="err-username" class="text-red-500 text-sm mt-1 hidden"></p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Email *</label
+            >
+            <input
+              id="form-email"
+              type="email"
+              required
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+            <p id="err-email" class="text-red-500 text-sm mt-1 hidden"></p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Phone</label
+            >
+            <input
+              id="form-phone"
+              type="text"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Website</label
+            >
+            <input
+              id="form-website"
+              type="text"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Company</label
+            >
+            <input
+              id="form-company"
+              type="text"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >City</label
+            >
+            <input
+              id="form-city"
+              type="text"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
+          <div class="flex gap-3 pt-2">
+            <button
+              type="submit"
+              class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onclick="
+                document.getElementById('form-modal').classList.add('hidden')
+              "
+              class="flex-1 bg-gray-300 text-gray-700 py-2 rounded hover:bg-gray-400 transition"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-sm mx-4 p-6 text-center">
+        <h2 class="text-xl font-bold text-red-600 mb-2">Delete User</h2>
+        <p id="delete-message" class="text-gray-600 mb-6"></p>
+        <div class="flex gap-3 justify-center">
+          <button id="btn-confirm-delete" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition">Delete</button>
+          <button onclick="document.getElementById('delete-modal').classList.add('hidden')"
+            class="bg-gray-300 text-gray-700 px-6 py-2 rounded hover:bg-gray-400 transition">Cancel</button>
+        </div>
+      </div>
+    </div>
+
     <div class="max-w-6xl mx-auto p-4">
       <h1 class="text-3xl font-bold text-center mb-6 text-indigo-700">
         User Management Dashboard
@@ -25,6 +181,69 @@
           class="absolute top-2 right-2 text-red-700 font-bold"
         >
           &times;
+        </button>
+      </div>
+
+      <!-- Controls bar -->
+      <div
+        id="controls"
+        class="bg-white rounded-lg shadow p-4 mb-4 flex flex-wrap gap-3 items-end"
+      >
+        <div class="flex-1 min-w-[200px]">
+          <label class="block text-sm font-medium text-gray-700 mb-1"
+            >Search (name / email)</label
+          >
+          <input
+            id="search-input"
+            type="text"
+            placeholder="Type to search..."
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+        </div>
+        <div class="min-w-[160px]">
+          <label class="block text-sm font-medium text-gray-700 mb-1"
+            >Filter by Company</label
+          >
+          <select
+            id="filter-company"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          >
+            <option value="">All Companies</option>
+          </select>
+        </div>
+        <div class="min-w-[160px]">
+          <label class="block text-sm font-medium text-gray-700 mb-1"
+            >Filter by City</label
+          >
+          <select
+            id="filter-city"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          >
+            <option value="">All Cities</option>
+          </select>
+        </div>
+        <div class="min-w-[160px]">
+          <label class="block text-sm font-medium text-gray-700 mb-1"
+            >Sort by</label
+          >
+          <select
+            id="sort-select"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          >
+            <option value="">None</option>
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="email-asc">Email (A-Z)</option>
+            <option value="email-desc">Email (Z-A)</option>
+            <option value="company-asc">Company (A-Z)</option>
+            <option value="company-desc">Company (Z-A)</option>
+          </select>
+        </div>
+        <button
+          id="btn-add-user"
+          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
+        >
+          + Add User
         </button>
       </div>
 
@@ -59,6 +278,11 @@
           </tbody>
         </table>
       </div>
+
+      <div
+        id="pagination"
+        class="flex justify-center items-center gap-2 mb-6"
+      ></div>
     </div>
 
     <script src="js/utils.js"></script>
