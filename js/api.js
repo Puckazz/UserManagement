@@ -22,7 +22,7 @@ async function updateUser(id, userData) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData),
   });
-  if (!res.ok) throw new Error(`Failed to create user (HTTP ${res.status})`);
+  if (!res.ok) throw new Error(`Failed to update user (HTTP ${res.status})`);
   return res.json();
 }
 

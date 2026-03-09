@@ -139,19 +139,15 @@
 
     try {
       if (editId) {
-        await updateUser(editId, userData);
         const idx = Store.users.findIndex((u) => u.id === parseInt(editId, 10));
         if (idx !== -1) Store.users[idx] = { ...Store.users[idx], ...userData };
       } else {
-        await createUser(userData);
         const maxId = Store.users.reduce((max, u) => Math.max(max, u.id), 0);
         const newUser = { ...userData, id: maxId + 1 };
         Store.users.push(newUser);
-
-        console.log(maxId);
       }
 
-      Store.saveToLocal(); // <<< Lưu sau khi thêm/sửa
+      Store.saveToLocal();
       document.getElementById("form-modal").classList.add("hidden");
       renderFilters();
       renderAll();
@@ -173,9 +169,8 @@
 
     newBtn.addEventListener("click", async () => {
       try {
-        await deleteUser(user.id);
         Store.users = Store.users.filter((u) => u.id !== user.id);
-        Store.saveToLocal(); // <<< Lưu sau khi xóa
+        Store.saveToLocal();
         document.getElementById("delete-modal").classList.add("hidden");
         renderFilters();
         renderAll();
