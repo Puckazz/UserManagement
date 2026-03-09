@@ -6,7 +6,7 @@ const Store = {
   filterCity: "",
   sortKey: "",
   currentPage: 1,
-  perPage: 5,
+  perPage: 10,
 
   applyFilters() {
     let list = [...this.users];
@@ -53,12 +53,10 @@ const Store = {
     return Math.max(1, Math.ceil(this.filtered.length / this.perPage));
   },
 
-  /** Lưu users vào LocalStorage */
   saveToLocal() {
     localStorage.setItem("um_users", JSON.stringify(this.users));
   },
 
-  /** Đọc users từ LocalStorage, trả về null nếu chưa có */
   loadFromLocal() {
     const data = localStorage.getItem("um_users");
     if (!data) return null;

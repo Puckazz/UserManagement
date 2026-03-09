@@ -13,7 +13,7 @@
     } else {
       const users = await fetchUsers();
       Store.users = users;
-      Store.saveToLocal(); // Lưu lần đầu
+      Store.saveToLocal();
     }
 
     renderFilters();
