@@ -31,17 +31,10 @@ const Store = {
     if (this.sortKey) {
       const [field, dir] = this.sortKey.split("-");
       list.sort((a, b) => {
-        let va, vb;
-        if (field === "company") {
-          va = (a.company?.name || "").toLowerCase();
-          vb = (b.company?.name || "").toLowerCase();
-        } else {
-          va = (a[field] || "").toLowerCase();
-          vb = (b[field] || "").toLowerCase();
-        }
-        if (va < vb) return dir === "asc" ? -1 : 1;
-        if (va > vb) return dir === "asc" ? 1 : -1;
-        return 0;
+        const va = (field === "company" ? a.company?.name : a[field]) || "";
+        const vb = (field === "company" ? b.company?.name : b[field]) || "";
+        const result = va.localeCompare(vb, "vi");
+        return dir === "asc" ? result : -result;
       });
     }
 
