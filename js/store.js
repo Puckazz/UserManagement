@@ -4,9 +4,9 @@ const Store = {
   searchTerm: "",
   filterCompany: "",
   filterCity: "",
-  sortKey: "", // "name-asc", "email-desc", v.v.
+  sortKey: "",
   currentPage: 1,
-  perPage: 5, // Đổi thành 3 để test, xong đổi lại 10
+  perPage: 5,
 
   applyFilters() {
     let list = [...this.users];
