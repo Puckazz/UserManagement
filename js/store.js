@@ -5,8 +5,8 @@ const Store = {
   filterCompany: "",
   filterCity: "",
   sortKey: "",
-  currentPage: 1,
-  perPage: 10,
+  currentPage: 2,
+  perPage: 12,
 
   applyFilters() {
     let list = [...this.users];
